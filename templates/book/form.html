@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ 'Edit' if book else 'Add' }} Book</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<nav class="nav">
+    <a href="{{ url_for('dashboard') }}">🏠 Dashboard</a>
+    <a href="{{ url_for('books') }}">📚 Books</a>
+    <a href="{{ url_for('authors') }}">✍️ Authors</a>
+    <a href="{{ url_for('quotes') }}">📝 Quotes</a>
+</nav>
+
+<form method="post">
+    <ul class="form-list">
+        <li>
+            <label for="title">Title:</label>
+            <input id="title" name="title" required value="{{ book.title if book else '' }}">
+        </li>
+
+        <li>
+            <label for="author">Author:</label>
+            <input id="author" name="author" list="authors" required value="{{ book.author_name if book else '' }}">
+            <datalist id="authors">
+                {% for author in authors %}
+                    <option value="{{ author.name }}">
+                {% endfor %}
+            </datalist>
+        </li>
+
+        <li>
+            <label for="format">Format:</label>
+            <input id="format" name="format" value="{{ book.format if book else '' }}">
+        </li>
+
+        <li>
+            <label for="status">Status:</label>
+            <select id="status" name="status">
+                {% for s in ['Unread', 'Reading', 'Completed'] %}
+                <option value="{{ s }}" {% if book and book.status == s %}selected{% endif %}>
+                    {{ s }}
+                </option>
+                {% endfor %}
+            </select>
+        </li>
+
+        <li>
+            <label for="total_pages">Total Pages:</label>
+            <input id="total_pages" name="total_pages" type="number" min="1" value="{{ book.total_pages if book else '' }}">
+        </li>
+
+        <li>
+            <label for="current_page">Current Page:</label>
+            <input id="current_page" name="current_page" type="number" min="0" value="{{ book.current_page if book else 0 }}">
+        </li>
+
+        <li>
+            <button type="submit">Save</button>
+            <a href="{{ url_for('books') }}">Cancel</a>
+        </li>
+    </ul>
+</form>
+
+</body>
+</html>

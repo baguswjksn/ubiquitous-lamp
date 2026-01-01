@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>My Personal E-Library</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <header>
+        <h1>📚 E-Library</h1>
+    </header>
+
+    <main>
+        <div class="stats">
+            <div class="card">
+                <h2>
+                    <a href="{{ url_for('books') }}">Books</a>
+                </h2>
+                <p><strong>{{ book_count }}</strong> total</p>
+            </div>
+
+            <div class="card">
+                <h2>
+                    <a href="{{ url_for('quotes') }}">Quotes</a>
+                </h2>
+                <p><strong>{{ quote_count }}</strong> saved</p>
+            </div>
+
+            <div class="card">
+                <h2>
+                    <a href="{{ url_for('authors') }}">Authors</a>
+                </h2>
+                <p><strong>{{ author_count }}</strong> total</p>
+            </div>
+        </div>
+
+        <!-- Recent Books -->
+        <h2>Recently Added Books</h2>
+        <table>
+            <tr>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Format</th>
+                <th>Status</th>
+            </tr>
+            {% for book in books %}
+            <tr>
+                <td>
+                    <a href="{{ url_for('view_book', book_id=book.id) }}">
+                        {{ book.title }}
+                    </a>
+                </td>
+
+                <td><a href="{{ url_for('author_detail', author_id=book.author_id) }}">{{ book.author_name }}</a></td>
+                <td>{{ book.format }}</td>
+                <td>{{ book.status }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+
+        <!-- Recent Quote -->
+        <h2 style="margin-top: 30px;">Recent Quote</h2>
+        {% if quote %}
+        <div class="card">
+            <p>
+                “{{ quote.content }}”
+                <br>
+                <small>— {{ quote.book_title }}</small>
+            </p>
+        </div>
+        {% else %}
+        <p>No quotes yet.</p>
+        {% endif %}
+
+    </main>
+
+    <footer>
+        © 2025 My E-Library
+    </footer>
+
+</body>
+
+</html>

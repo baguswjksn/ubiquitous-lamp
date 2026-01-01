@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Author: {{ author.name }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <!-- Navigation -->
+    <header>
+        <nav class="nav">
+            <a href="{{ url_for('dashboard') }}">🏠 Dashboard</a>
+            <a href="{{ url_for('books') }}">📚 Books</a>
+            <a href="{{ url_for('authors') }}">✍️ Authors</a>
+            <a href="{{ url_for('quotes') }}">📝 Quotes</a>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+
+        <!-- Author Header -->
+        <section class="author-header">
+            <h1>Author: {{ author.name }}</h1>
+            <a href="{{ url_for('authors') }}" class="back-link">
+                ← Back to Authors
+            </a>
+        </section>
+
+        <!-- Books by Author -->
+        <section class="author-books">
+            <h2>Books by {{ author.name }}</h2>
+
+            {% if books %}
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Format</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for book in books %}
+                            <tr>
+                                <td>{{ book.title }}</td>
+                                <td>{{ book.format }}</td>
+                                <td>{{ book.status }}</td>
+                                <td>
+                                    <a href="{{ url_for('edit_book', book_id=book.id) }}">
+                                        ✏️ Edit
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p>No books found for this author.</p>
+            {% endif %}
+        </section>
+
+        <!-- Quotes by Author -->
+        <section class="author-quotes">
+            <h2>Quotes from {{ author.name }}’s Books</h2>
+
+            {% if quotes %}
+                <ul class="quote-list">
+                    {% for quote in quotes %}
+                        <li>
+                            “{{ quote.content }}”
+                            {% if quote.page_number %}
+                                <span class="page-number">(p. {{ quote.page_number }})</span>
+                            {% endif %}
+                            — <em>{{ quote.book_title }}</em>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No quotes found for this author.</p>
+            {% endif %}
+        </section>
+
+    </main>
+
+</body>
+</html>

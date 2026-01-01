@@ -1,0 +1,153 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* Body */
+body {
+    background-color: #fff; /* White background */
+    color: #000; /* Black text */
+    line-height: 1.6;
+    padding: 20px;
+}
+
+/* Header */
+header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+header h1 {
+    font-size: 2em;
+    font-weight: bold;
+}
+
+/* Navigation */
+nav {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+nav a {
+    text-decoration: none;
+    color: #000;
+    margin: 0 15px;
+    font-weight: bold;
+    padding: 5px 10px;
+    transition: all 0.2s;
+}
+
+nav a:hover {
+    background-color: #000;
+    color: #fff;
+    border-radius: 5px;
+}
+
+/* Stats Cards */
+.stats {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+.card {
+    border: 1px solid #000;
+    padding: 15px 20px;
+    margin: 10px;
+    flex: 1 1 150px;
+    text-align: center;
+    background-color: #fff;
+    transition: transform 0.2s;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+/* Tables */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 30px;
+}
+
+th, td {
+    border: 1px solid #000;
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background-color: #000;
+    color: #fff;
+}
+
+/* Recent Quote */
+.card p {
+    font-style: italic;
+    text-align: center;
+}
+
+.card small {
+    display: block;
+    margin-top: 10px;
+    font-size: 0.9em;
+    font-style: normal;
+    color: #555;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    margin-top: 50px;
+    font-size: 0.9em;
+    color: #555;
+}
+
+.form-list {
+    list-style: none; /* Remove bullets */
+    padding: 0;
+    max-width: 400px;
+    margin: 20px auto;
+}
+
+.form-list li {
+    margin-bottom: 15px;
+}
+
+.form-list label {
+    display: block; /* Force label above input */
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.form-list input,
+.form-list select,
+.form-list textarea {
+    width: 100%;
+    padding: 8px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+.form-list button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.form-list a {
+    margin-left: 10px;
+    text-decoration: none;
+    padding: 10px 15px;
+    background-color: #ccc;
+    color: black;
+    border-radius: 5px;
+}

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ "Edit Author" if author else "Add Author" }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <!-- Navigation -->
+    <header>
+        <nav class="nav">
+            <a href="{{ url_for('dashboard') }}">🏠 Dashboard</a>
+            <a href="{{ url_for('books') }}">📚 Books</a>
+            <a href="{{ url_for('authors') }}">✍️ Authors</a>
+            <a href="{{ url_for('quotes') }}">📝 Quotes</a>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <h1>{{ "Edit Author" if author else "Add Author" }}</h1>
+
+        <form method="POST">
+            <ul class="form-list">
+                <li>
+                    <label for="name">Name:</label>
+                    <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        value="{{ author.name if author else '' }}"
+                        required
+                    >
+                </li>
+
+                <li class="form-actions">
+                    <button type="submit">
+                        {{ "Save" if author else "Add" }}
+                    </button>
+                    <a href="{{ url_for('authors') }}">Back to Authors</a>
+                </li>
+            </ul>
+        </form>
+    </main>
+
+</body>
+</html>
