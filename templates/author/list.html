@@ -1,22 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Authors</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
+
 <body>
-
-    <!-- Navigation -->
-    <header>
-        <nav class="nav">
-            <a href="{{ url_for('dashboard') }}">🏠 Dashboard</a>
-            <a href="{{ url_for('books') }}">📚 Books</a>
-            <a href="{{ url_for('authors') }}">✍️ Authors</a>
-            <a href="{{ url_for('quotes') }}">📝 Quotes</a>
-        </nav>
-    </header>
-
     <!-- Main Content -->
     <main>
         <h1>Authors</h1>
@@ -24,12 +15,7 @@
         <!-- Search bar + Add Author -->
         <section class="search-section">
             <form method="get" class="search-bar">
-                <input
-                    type="text"
-                    name="q"
-                    placeholder="Search authors..."
-                    value="{{ search_query }}"
-                >
+                <input type="text" name="q" placeholder="Search authors..." value="{{ search_query }}">
                 <button type="submit">Search</button>
                 <a href="{{ url_for('add_author') }}" class="add-link">
                     ➕ Add Author
@@ -49,31 +35,32 @@
 
                 <tbody>
                     {% if authors|length == 0 %}
-                        <tr>
-                            <td colspan="2">No authors found.</td>
-                        </tr>
+                    <tr>
+                        <td colspan="2">No authors found.</td>
+                    </tr>
                     {% endif %}
 
                     {% for author in authors %}
-                        <tr>
-                            <td><a href="{{ url_for('author_detail', author_id=author.id) }}">{{ author.name }}</a></td>
-                            <td class="actions">
-                                <a href="{{ url_for('edit_author', author_id=author.id) }}">
-                                    ✏️ Edit
-                                </a>
-                                <a
-                                    href="{{ url_for('delete_author', author_id=author.id) }}"
-                                    onclick="return confirm('Delete this author?')"
-                                >
-                                    🗑 Delete
-                                </a>
-                            </td>
-                        </tr>
+                    <tr>
+                        <td><a href="{{ url_for('author_detail', author_id=author.id) }}">{{ author.name }}</a></td>
+                        <td class="actions">
+                            <a href="{{ url_for('edit_author', author_id=author.id) }}">
+                                ✏️ Edit
+                            </a>
+                            <a href="{{ url_for('delete_author', author_id=author.id) }}"
+                                onclick="return confirm('Delete this author?')">
+                                🗑 Delete
+                            </a>
+                        </td>
+                    </tr>
                     {% endfor %}
                 </tbody>
             </table>
         </section>
     </main>
+    <!-- PAGE SELECTOR -->
+    {% include "components/page-nav.html" %}
 
 </body>
+
 </html>

@@ -1,20 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>{{ "Edit Quote" if quote else "Add Quote" }}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
-<body>
 
-    <!-- Navigation -->
-    <header>
-        <nav class="nav">
-            <a href="{{ url_for('dashboard') }}">🏠 Dashboard</a>
-            <a href="{{ url_for('books') }}">📚 Books</a>
-            <a href="{{ url_for('authors') }}">✍️ Authors</a>
-            <a href="{{ url_for('quotes') }}">📝 Quotes</a>
-        </nav>
+<body>
     </header>
 
     <!-- Main Content -->
@@ -27,35 +20,23 @@
                     <label for="book">Book:</label>
                     <select name="book_id" id="book" required>
                         {% for book in books %}
-                            <option
-                                value="{{ book.id }}"
-                                {% if quote and quote.book_id == book.id %}selected{% endif %}
-                            >
-                                {{ book.title }}
-                            </option>
+                        <option value="{{ book.id }}" {% if quote and quote.book_id==book.id %}selected{% endif %}>
+                            {{ book.title }}
+                        </option>
                         {% endfor %}
                     </select>
                 </li>
 
                 <li>
                     <label for="content">Quote:</label>
-                    <textarea
-                        name="content"
-                        id="content"
-                        rows="4"
-                        required
-                    >{{ quote.content if quote else '' }}</textarea>
+                    <textarea name="content" id="content" rows="4"
+                        required>{{ quote.content if quote else '' }}</textarea>
                 </li>
 
                 <li>
                     <label for="page_number">Page Number:</label>
-                    <input
-                        type="number"
-                        name="page_number"
-                        id="page_number"
-                        value="{{ quote.page_number if quote else '' }}"
-                        min="1"
-                    >
+                    <input type="number" name="page_number" id="page_number"
+                        value="{{ quote.page_number if quote else '' }}" min="1">
                 </li>
 
                 <li class="form-actions">
@@ -65,6 +46,9 @@
             </ul>
         </form>
     </main>
+    <!-- PAGE SELECTOR -->
+    {% include "components/page-nav.html" %}
 
 </body>
+
 </html>

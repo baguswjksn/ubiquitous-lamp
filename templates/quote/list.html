@@ -9,16 +9,6 @@
 
 <body>
 
-    <!-- Navigation -->
-    <header>
-        <nav class="nav">
-            <a href="{{ url_for('dashboard') }}">🏠 Dashboard</a>
-            <a href="{{ url_for('books') }}">📚 Books</a>
-            <a href="{{ url_for('authors') }}">✍️ Authors</a>
-            <a href="{{ url_for('quotes') }}">📝 Quotes</a>
-        </nav>
-    </header>
-
     <!-- Main Content -->
     <main>
         <h1>Quotes</h1>
@@ -64,6 +54,9 @@
             </table>
         </section>
     </main>
+
+    <!-- PAGE SELECTOR -->
+    {% include "components/page-nav.html" %}
 
 </body>
 

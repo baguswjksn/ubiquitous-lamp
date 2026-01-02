@@ -1,50 +1,49 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Books</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
+
 <body>
-<nav class="nav">
-    <a href="{{ url_for('dashboard') }}">🏠 Dashboard</a>
-    <a href="{{ url_for('books') }}">📚 Books</a>
-    <a href="{{ url_for('authors') }}">✍️ Authors</a>
-    <a href="{{ url_for('quotes') }}">📝 Quotes</a>
-</nav>
+    <h1>Books</h1>
+    <form method="get">
+        <input type="text" name="q" placeholder="Search books..." value="{{ search }}">
+        <button type="submit">Search</button>
+        <a href="{{ url_for('add_book') }}">➕ Add Book</a>
+    </form>
 
-<h1>Books</h1>
-<form method="get">
-    <input type="text" name="q" placeholder="Search books..." value="{{ search }}">
-    <button type="submit">Search</button>
-    <a href="{{ url_for('add_book') }}">➕ Add Book</a>
-</form>
+    <table>
+        <tr>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Format</th>
+            <th>Current Page</th>
+            <th>Total pages</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+        {% for book in books %}
+        <tr>
+            <td><a href="{{ url_for('view_book', book_id=book.id) }}">{{ book.title }}</a></td>
+            <td><a href="{{ url_for('author_detail', author_id=book.author_id) }}">{{ book.author_name }}</a></td>
+            <td>{{ book.format }}</td>
+            <td>{{ book.current_page }}</td>
+            <td>{{ book.total_pages }}</td>
+            <td>{{ book.status }}</td>
+            <td>
+                <a href="{{ url_for('edit_book', book_id=book.id) }}">✏️ Edit</a>
+                <a href="{{ url_for('delete_book', book_id=book.id) }}" onclick="return confirm('Delete this book?')">🗑
+                    Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
 
-<table>
-    <tr>
-        <th>Title</th>
-        <th>Author</th>
-        <th>Format</th>
-        <th>Current Page</th>
-        <th>Total pages</th>
-        <th>Status</th>
-        <th>Actions</th>
-    </tr>
-    {% for book in books %}
-    <tr>
-        <td><a href="{{ url_for('view_book', book_id=book.id) }}">{{ book.title }}</a></td>
-        <td><a href="{{ url_for('author_detail', author_id=book.author_id) }}">{{ book.author_name }}</a></td>
-        <td>{{ book.format }}</td>
-        <td>{{ book.current_page }}</td>
-        <td>{{ book.total_pages }}</td>
-        <td>{{ book.status }}</td>
-        <td>
-            <a href="{{ url_for('edit_book', book_id=book.id) }}">✏️ Edit</a>
-            <a href="{{ url_for('delete_book', book_id=book.id) }}"
-               onclick="return confirm('Delete this book?')">🗑 Delete</a>
-        </td>
-    </tr>
-    {% endfor %}
-</table>
+    <!-- PAGE SELECTOR -->
+    {% include "components/page-nav.html" %}
 
 </body>
+
 </html>

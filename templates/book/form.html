@@ -7,13 +7,6 @@
 </head>
 <body>
 
-<nav class="nav">
-    <a href="{{ url_for('dashboard') }}">🏠 Dashboard</a>
-    <a href="{{ url_for('books') }}">📚 Books</a>
-    <a href="{{ url_for('authors') }}">✍️ Authors</a>
-    <a href="{{ url_for('quotes') }}">📝 Quotes</a>
-</nav>
-
 <form method="post">
     <ul class="form-list">
         <li>
@@ -63,6 +56,7 @@
         </li>
     </ul>
 </form>
-
+    <!-- PAGE SELECTOR -->
+    {% include "components/page-nav.html" %}
 </body>
 </html>
